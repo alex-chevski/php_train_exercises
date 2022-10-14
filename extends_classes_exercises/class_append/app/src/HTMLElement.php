@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\src;
 
-class HTMLElement implements HTMLValueInterface
+class HTMLElement implements HTMLElementInterface
 {
     protected $atributes = [];
 
@@ -33,7 +33,7 @@ class HTMLElement implements HTMLValueInterface
 
         $attr_values = explode(' ', $atributes['class']);
 
-        $new_atributes = $this->filterClasses($attr_values, $className);
+        $new_atributes = $this->filterValues($attr_values, $className);
 
         $this->atributes['class'] = implode(' ', $new_atributes);
     }
@@ -43,7 +43,7 @@ class HTMLElement implements HTMLValueInterface
         $atributes = $this->atributes;
         $attr_values = explode(' ', $atributes['class']);
 
-        if (count($attr_values) === count($this->filterClasses($attr_values, $className))) {
+        if (count($attr_values) === count($this->filterValues($attr_values, $className))) {
             $this->addClass($className);
         } else {
             $this->removeClass($className);
@@ -55,7 +55,7 @@ class HTMLElement implements HTMLValueInterface
         return array_map(fn ($attr_values) => "{$attr_values} {$new_value}", $atribute);
     }
 
-    private function filterClasses(array $haystack, string $needle)
+    private function filterValues(array $haystack, string $needle)
     {
         return array_values(array_filter($haystack, fn ($value) => $value === $needle ? '' : $value));
     }

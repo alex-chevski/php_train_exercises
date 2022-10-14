@@ -5,6 +5,7 @@
 addClass($className) – добавляет класс
 removeClass($className) – удаляет класс
 toggleClass($className) – ставит класс если его не было и убирает если он был
+
 Пример:
 $div = new HTMLDivElement(['class' => 'one two']);
 $div->getAttribute('class'); // 'one two'
